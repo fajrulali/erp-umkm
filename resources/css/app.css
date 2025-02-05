@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animasi fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden; /* Mencegah glitch saat elemen belum muncul */
+    }
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+  
+  /* Kustomisasi Tailwind lainnya (jika ada) */
+@layer components {
+    .fade-in {
+        @apply opacity-0 transition-opacity duration-[600ms] ease-in-out;
+        will-change: opacity;
+        animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .input-field {
+        @apply border border-gray-300 rounded-md p-2 w-full transition-all duration-300 ease-in-out focus:ring-2 focus:ring-blue-400 focus:ring-offset-0 focus:border-transparent focus:outline-none;
+        }   
+        .input-field:not(:focus):hover {
+            @apply border-blue-400;
+        }
+        .input-field-error {
+            @apply border-red-500 focus:ring-red-400;
+        }
+        .input-field-valid {
+            @apply border-green-500 focus:ring-green-400;
+        }
+    
+    .btn {
+        @apply w-full text-white p-2 rounded flex items-center justify-center transition-all duration-300 ease-in-out relative overflow-hidden;
+    }
+        .btn-primary {
+            @apply bg-blue-500 hover:bg-blue-700 active:scale-95;
+        }
+        .btn-loading {
+            @apply bg-blue-300 cursor-not-allowed;
+        }
+        .btn-icon {
+            @apply animate-spin h-5 w-5 mr-2 border-t-2 border-white rounded-full;
+        }
+        .btn-splash {
+            @apply absolute left-1/2 top-0 w-0 h-full bg-blue-300 opacity-0 
+                    transition-[width,opacity] duration-300 ease-out;
+            transform: translateX(-50%);
+            will-change: width, opacity; /* Mencegah Tailwind mereset animasi */
+            }
+        
+        .btn-splash-active {
+            @apply w-full opacity-50;
+        } 
+        .btn-loading:hover {
+            @apply bg-blue-300; /* Tetap di warna loading */
+            }            
+}
+
+    #nprogress {
+        pointer-events: none; /* Biar gak ganggu interaksi */
+      }
+      
+      #nprogress .bar {
+        background: rgba(255, 255, 255, 0.2) !important; /* Warna putih transparan */
+        height: 2px !important; /* Tipis & elegan */
+        border-radius: 2px; /* Biar gak tajam */
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Glow halus */
+        backdrop-filter: blur(3px); /* Efek kaca */
+        transition: width 0.3s ease-out, opacity 0.4s ease-in; /* Gerakan smooth */
+      }
+      
+      #nprogress .peg {
+        display: none; /* Hilangin peg biar lebih clean */
+      }
+      
+      #nprogress .spinner {
+        display: none !important; /* Hilangin spinner biar lebih minimalis */
+      }
+      
